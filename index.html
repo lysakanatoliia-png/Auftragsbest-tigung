@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wärmepumpeninstallation Auftragsbestätigung – SKYBUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0d0d0d;
+            --bg2: #141414;
+            --bg3: #1a1a1a;
+            --accent: #f07d0f;
+            --accent-dim: rgba(240,125,15,0.10);
+            --accent-glow: rgba(240,125,15,0.25);
+            --text: #ffffff;
+            --text2: #888888;
+            --text3: #555555;
+            --border: #252525;
+            --border2: #333333;
+            --radius: 5px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ─── NAV ─────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(13,13,13,0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-logo-wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-sep {
+            width: 1px;
+            height: 28px;
+            background: var(--border2);
+        }
+
+        .nav-doc {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text2);
+            letter-spacing: 0.01em;
+        }
+
+        /* ─── HERO ─────────────────────────────── */
+        .hero {
+            padding: 128px 48px 72px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .hero-label::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 5.5vw, 64px);
+            font-weight: 900;
+            line-height: 1.06;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .hero-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            color: var(--text2);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        /* ─── CONTENT ──────────────────────────── */
+        .content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 56px 48px 120px;
+        }
+
+        /* ─── SECTION ──────────────────────────── */
+        .section {
+            margin-bottom: 4px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section::before,
+        .section::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: var(--border2);
+            border-style: solid;
+            transition: border-color 0.3s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .section::before {
+            top: -1px; left: -1px;
+            border-width: 2px 0 0 2px;
+            border-radius: var(--radius) 0 0 0;
+        }
+
+        .section::after {
+            bottom: -1px; right: -1px;
+            border-width: 0 2px 2px 0;
+            border-radius: 0 0 var(--radius) 0;
+        }
+
+        .section:hover::before,
+        .section:hover::after {
+            border-color: var(--accent);
+        }
+
+        .section-header {
+            padding: 18px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .section-header:hover { background: var(--bg2); }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-num {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            margin-right: 14px;
+        }
+
+        .section-arrow {
+            color: var(--text3);
+            transition: transform 0.25s, color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .section-arrow svg { width: 14px; height: 14px; display: block; }
+
+        .section.open .section-arrow {
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        .section-body {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 0 24px 24px;
+        }
+
+        .section.open .section-body { display: block; }
+
+        /* ─── FIELDS ───────────────────────────── */
+        .fields { padding-top: 20px; }
+
+        .row { display: grid; gap: 14px; margin-bottom: 14px; }
+        .row-1 { grid-template-columns: 1fr; }
+        .row-2 { grid-template-columns: 1fr 1fr; }
+        .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+        .field { display: flex; flex-direction: column; gap: 7px; }
+
+        .field label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text2);
+        }
+
+        .field input,
+        .field textarea,
+        .field select {
+            background: var(--bg2);
+            border: 1px solid var(--border2);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            padding: 11px 13px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            border-radius: var(--radius);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: var(--accent);
+            background: var(--bg3);
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder { color: var(--text3); }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 96px;
+            line-height: 1.6;
+        }
+
+        /* ─── BLOCK ────────────────────────────── */
+        .block {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .block-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .block-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ─── RADIO ────────────────────────────── */
+        .radios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-bottom: 14px;
+        }
+
+        .radio-opt input[type="radio"],
+        .radio-opt input[type="checkbox"] { display: none; }
+
+        .radio-opt label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text2);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: none;
+            letter-spacing: 0;
+            margin-right: -1px;
+        }
+
+        .radio-opt:first-child label { border-radius: var(--radius) 0 0 var(--radius); }
+        .radio-opt:last-child label { border-radius: 0 var(--radius) var(--radius) 0; }
+
+        .radio-opt label::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            border: 1px solid var(--border2);
+            transition: all 0.2s;
+        }
+
+        .radio-opt input:checked + label {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--accent);
+            z-index: 1;
+        }
+
+        .radio-opt input:checked + label::before {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ─── UPLOAD ───────────────────────────── */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding-top: 20px;
+        }
+
+        .upload-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 12px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 110px;
+            position: relative;
+            background: var(--bg2);
+            transition: all 0.2s;
+            overflow: hidden;
+        }
+
+        .upload-item:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .upload-item input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-item-icon { font-size: 18px; opacity: 0.45; }
+
+        .upload-item-name {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text2);
+        }
+
+        .upload-preview {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 3px;
+            display: none;
+        }
+
+        /* ─── SCHEMA ───────────────────────────── */
+        .schema-pair {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            gap: 0;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .schema-img {
+            background: var(--bg2);
+            min-height: 260px;
+            border-right: 1px solid var(--border);
+            overflow: hidden;
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        .schema-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        .schema-inputs {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            background: var(--bg2);
+        }
+
+        /* ─── PRINT PREVIEW MODAL ──────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 999;
+            overflow-y: auto;
+            padding: 40px 24px;
+        }
+
+        .modal-overlay.open { display: flex; flex-direction: column; align-items: center; }
+
+        .modal-bar {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .modal-bar-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text2);
+        }
+
+        .modal-bar-actions { display: flex; gap: 10px; }
+
+        .modal-doc {
+            background: #ffffff;
+            color: #000000;
+            width: 100%;
+            max-width: 800px;
+            padding: 56px 64px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #f07d0f;
+        }
+
+        .doc-logo-wrap { display: flex; flex-direction: column; gap: 4px; }
+        .doc-logo { height: 36px; }
+        .doc-company { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #f07d0f; }
+
+        .doc-title-wrap { text-align: right; }
+        .doc-title { font-size: 20px; font-weight: 900; letter-spacing: -0.02em; color: #000; }
+        .doc-subtitle { font-size: 11px; font-weight: 600; color: #888; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+        .doc-section { margin-bottom: 24px; }
+
+        .doc-section-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #f07d0f;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f0e8d8;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .doc-table tr { border-bottom: 1px solid #f0f0f0; }
+        .doc-table tr:last-child { border-bottom: none; }
+
+        .doc-table td { padding: 7px 0; vertical-align: top; }
+
+        td.dl {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #999;
+            width: 42%;
+            padding-right: 16px;
+        }
+
+        td.dv {
+            font-size: 13px;
+            font-weight: 500;
+            color: #111;
+        }
+
+        td.dv.empty {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ─── DOC PHOTOS ───────────────────────── */
+        .doc-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .doc-photo-item { display: flex; flex-direction: column; gap: 6px; }
+
+        .doc-photo-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .doc-photo-label {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #999;
+            text-align: center;
+        }
+
+        .doc-no-photo {
+            font-size: 12px;
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ─── DOC SCHEMA ───────────────────────── */
+        .doc-schema-block {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .doc-schema-img {
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-right: 1px solid #eee;
+        }
+
+        .doc-schema-img img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+        }
+
+        .doc-schema-fields {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .doc-schema-fields .doc-table tr { border-bottom: 1px solid #f5f5f5; }
+
+        /* ─── ACTIONS ──────────────────────────── */
+        .actions {
+            display: flex;
+            gap: 10px;
+            padding-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: all 0.2s;
+            border-radius: var(--radius);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #ff8c20;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text2);
+            border: 1px solid var(--border2);
+        }
+
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ─── FOOTER ───────────────────────────── */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left { font-size: 12px; color: var(--text3); }
+        .footer-right { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+
+        /* ─── RESPONSIVE ───────────────────────── */
+        /* ─── ПЛАНШЕТ (≤ 1024px) ──────────────────── */
+        @media (max-width: 1024px) {
+            .nav { padding: 0 28px; }
+            .hero { padding: 110px 28px 56px; }
+            .content { padding: 48px 28px 100px; }
+            .footer { padding: 24px 28px; }
+            .row-3 { grid-template-columns: 1fr 1fr; }
+            .modal-doc { padding: 40px 48px; }
+            .doc-photo-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ─── МОБІЛЬНИЙ (≤ 640px) ──────────────────── */
+        @media (max-width: 640px) {
+            /* Nav */
+            .nav {
+                padding: 0 16px;
+                height: 56px;
+            }
+            .nav-logo { height: 26px; }
+            .nav-sep { display: none; }
+            .nav-doc {
+                font-size: 11px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 160px;
+            }
+
+            /* Hero */
+            .hero {
+                padding: 80px 16px 40px;
+            }
+            .hero-label { font-size: 9px; margin-bottom: 16px; }
+            .hero-title { font-size: 32px; }
+            .hero-sub { font-size: 13px; }
+
+            /* Content */
+            .content { padding: 24px 16px 80px; }
+
+            /* Sections */
+            .section-header { padding: 16px; }
+            .section-body { padding: 0 16px 20px; }
+            .section-num { margin-right: 10px; }
+
+            /* Grid → одна колонка */
+            .row-2,
+            .row-3 { grid-template-columns: 1fr; gap: 12px; }
+
+            /* Radio — вертикально */
+            .radios { flex-direction: column; }
+            .radio-opt label { border-radius: 0 !important; margin-right: 0; margin-bottom: -1px; }
+            .radio-opt:first-child label { border-radius: var(--radius) var(--radius) 0 0 !important; }
+            .radio-opt:last-child label { border-radius: 0 0 var(--radius) var(--radius) !important; }
+
+            /* Blocks */
+            .block { padding: 14px; }
+
+            /* Upload */
+            .upload-grid { grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 16px; }
+            .upload-item { min-height: 90px; padding: 14px 8px; }
+            .upload-item-name { font-size: 9px; }
+
+            /* Schema */
+            .schema-pair { grid-template-columns: 1fr; }
+            .schema-img {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                border-radius: var(--radius) var(--radius) 0 0;
+                min-height: 180px;
+            }
+            .schema-img img { border-radius: var(--radius) var(--radius) 0 0; }
+            .schema-inputs { padding: 14px; }
+
+            /* Buttons */
+            .actions { flex-direction: column; gap: 8px; }
+            .btn { width: 100%; justify-content: center; padding: 14px 20px; }
+
+            /* Footer */
+            .footer {
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
+                padding: 20px 16px;
+            }
+            .footer-left { font-size: 10px; }
+
+            /* Modal */
+            .modal-overlay { padding: 16px 0; }
+            .modal-bar {
+                padding: 0 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 14px;
+            }
+            .modal-bar-actions { width: 100%; }
+            .modal-bar-actions .btn { flex: 1; justify-content: center; }
+            .modal-doc {
+                padding: 24px 16px;
+                border-radius: 0;
+            }
+
+            /* Preview doc */
+            .doc-header { flex-direction: column; gap: 16px; }
+            .doc-title-wrap { text-align: left; }
+            .doc-title { font-size: 16px; }
+            .doc-photo-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .doc-photo-item img { height: 90px; }
+            .doc-schema-block { grid-template-columns: 1fr; }
+            .doc-schema-img { border-right: none; border-bottom: 1px solid #eee; }
+            td.dl { width: 48%; font-size: 9px; }
+            td.dv { font-size: 12px; }
+        }
+
+        /* ─── ДУЖЕ МАЛЕНЬКИЙ ЕКРАН (≤ 380px) ──────── */
+        @media (max-width: 380px) {
+            .hero-title { font-size: 26px; }
+            .nav-doc { max-width: 110px; }
+            .upload-grid { grid-template-columns: 1fr; }
+            .doc-photo-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── PRINT ────────────────────────────── */
+        @media print {
+            .nav, .hero, .content, .footer, .modal-bar { display: none !important; }
+            body { background: #fff !important; }
+
+            .modal-overlay {
+                display: block !important;
+                position: static !important;
+                background: #fff !important;
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+
+            .modal-doc {
+                max-width: 100% !important;
+                padding: 24px 32px !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+
+            .doc-photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .doc-photo-item img { height: 110px; }
+            .doc-schema-block { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <div class="nav-logo-wrap">
+                <img class="nav-logo" src="./logo.png" alt="SKYBUD">
+            </div>
+            <div class="nav-sep"></div>
+            <span class="nav-doc">Wärmepumpeninstallation Auftragsbestätigung</span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-label">SKYBUD — 2026</div>
+        <h1 class="hero-title">
+            Wärmepumpen<br><em>Auftragsbestätigung</em>
+        </h1>
+        <p class="hero-sub">
+            Projektdokumentation für Monteure und Projektmanager.
+            Technische Daten, Standort und Checklisten auf einem Blick.
+        </p>
+    </section>
+
+    <!-- FORM -->
+    <div class="content">
+        <form id="wpForm">
+
+            <!-- 01 KUNDE -->
+            <div class="section open">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">01</span>Kunde</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="row row-2">
+                            <div class="field"><label>Name</label><input type="text" id="k_name"></div>
+                            <div class="field"><label>Telefon</label><input type="tel" id="k_tel"></div>
+                        </div>
+                        <div class="row row-1">
+                            <div class="field"><label>E-Mail</label><input type="email" id="k_email"></div>
+                        </div>
+                        <div class="row row-1">
+                            <div class="field"><label>Anschrift</label><input type="text" id="k_addr"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 02 PROJEKT -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">02</span>Projekt</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="block">
+                            <div class="block-label">Wärmepumpe</div>
+                            <div class="row row-2">
+                                <div class="field"><label>Modell</label><input type="text" id="wp_modell"></div>
+                                <div class="field"><label>Leistung (kW)</label><input type="number" step="0.1" id="wp_kw"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Hydraulikstation</div>
+                            <div class="row row-2">
+                                <div class="field"><label>Modell</label><input type="text" id="hs_modell"></div>
+                                <div class="field"><label>Display / Besonderheiten</label><input type="text" id="hs_display"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Warmwasserspeicher</div>
+                            <div class="row row-2">
+                                <div class="field"><label>Kapazität (Liter)</label><input type="number" step="10" id="wws_liter"></div>
+                                <div class="field"><label>Modell</label><input type="text" id="wws_modell"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Pufferspeicher</div>
+                            <div class="row row-2">
+                                <div class="field"><label>Kapazität (Liter)</label><input type="number" step="10" id="ps_liter"></div>
+                                <div class="field"><label>Modell</label><input type="text" id="ps_modell"></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Altheizung</div>
+                            <div class="radios">
+                                <div class="radio-opt"><input type="radio" name="oldHeating" id="hOil"><label for="hOil">Ölheizung</label></div>
+                                <div class="radio-opt"><input type="radio" name="oldHeating" id="hGas"><label for="hGas">Gasheizung</label></div>
+                                <div class="radio-opt"><input type="radio" name="oldHeating" id="hOther"><label for="hOther">Sonstiges</label></div>
+                            </div>
+                            <div class="row row-1"><div class="field"><label>Modell / Beschreibung</label><input type="text" id="alt_desc"></div></div>
+                            <div class="row row-1"><div class="field"><label>Entsorgung / Netzbetreiber</label><input type="text" id="alt_entsorgung"></div></div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Solar / Photovoltaik</div>
+                            <div class="radios">
+                                <div class="radio-opt"><input type="radio" name="solar" id="sNo"><label for="sNo">Nein</label></div>
+                                <div class="radio-opt"><input type="radio" name="solar" id="sYes"><label for="sYes">Ja</label></div>
+                                <div class="radio-opt"><input type="radio" name="solar" id="sSep"><label for="sSep">Separat beauftragt</label></div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">SG Ready</div>
+                            <div class="radios">
+                                <div class="radio-opt"><input type="radio" name="sgReady" id="sgY"><label for="sgY">Ja</label></div>
+                                <div class="radio-opt"><input type="radio" name="sgReady" id="sgN"><label for="sgN">Nein</label></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 03 GEBÄUDE -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">03</span>Gebäude</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="row row-3">
+                            <div class="field"><label>Wohnfläche (m²)</label><input type="number" step="0.01" id="g_flaeche"></div>
+                            <div class="field"><label>Heizlast (kW)</label><input type="number" step="0.1" id="g_heizlast"></div>
+                            <div class="field"><label>Heizbedarf (W/m²)</label><input type="number" id="g_heizbedarf"></div>
+                        </div>
+                        <div class="row row-3">
+                            <div class="field"><label>Geschosse</label><input type="number" id="g_geschosse"></div>
+                            <div class="field"><label>Länge (m)</label><input type="number" step="0.5" id="g_laenge"></div>
+                            <div class="field"><label>Breite (m)</label><input type="number" step="0.5" id="g_breite"></div>
+                        </div>
+                        <div class="row row-2">
+                            <div class="field"><label>Raumhöhe Min (m)</label><input type="number" step="0.1" id="g_hmin"></div>
+                            <div class="field"><label>Raumhöhe Max (m)</label><input type="number" step="0.1" id="g_hmax"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 04 MONTAGE -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">04</span>Montage / Standort</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="row row-1"><div class="field"><label>Standort Wärmepumpe</label><input type="text" id="m_standort"></div></div>
+                        <div class="row row-2">
+                            <div class="field"><label>Leitung außen (m)</label><input type="number" step="0.1" id="m_aussen"></div>
+                            <div class="field"><label>Leitung innen (m)</label><input type="number" step="0.1" id="m_innen"></div>
+                        </div>
+                        <div class="row row-2">
+                            <div class="field"><label>Kernbohrung (mm)</label><input type="number" id="m_kern"></div>
+                            <div class="field"><label>Heizkörper / Ventile (Anzahl)</label><input type="number" id="m_hk"></div>
+                        </div>
+                        <div class="row row-1"><div class="field"><label>Zählerschrank / Zählertyp</label><input type="text" id="m_zaehler"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 05 HINWEISE -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">05</span>Hinweise für Monteure / PM</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="block">
+                            <div class="block-label">Hinweise für Monteure</div>
+                            <div class="field"><textarea id="h_monteure"></textarea></div>
+                        </div>
+                        <div class="block">
+                            <div class="block-label">Hinweise für PM</div>
+                            <div class="field"><textarea id="h_pm"></textarea></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 06 BILDER -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">06</span>Vor-Ort-Bilder</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="upload-grid">
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Standort WP</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Ölheizung</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Öltank</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Förderpumpe 1</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Förderpumpe 2</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Heizung</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Warmwasserspeicher</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Zählerschrank</div>
+                        </div>
+                        <div class="upload-item">
+                            <input type="file" accept="image/*" onchange="prevImg(this)">
+                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
+                            <div class="upload-item-name">Verteiler FBH OG</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07 SCHEMA -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">07</span>Aufstellungsschema</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="schema-pair">
+                            <div class="schema-img">
+                                <img src="./schema1.png" alt="Schema 1">
+                            </div>
+                            <div class="schema-inputs">
+                                <div class="field"><label>A (mm)</label><input type="number" id="s1a"></div>
+                                <div class="field"><label>B (mm)</label><input type="number" id="s1b"></div>
+                                <div class="field"><label>C (mm)</label><input type="number" id="s1c"></div>
+                                <div class="field"><label>D (mm)</label><input type="number" id="s1d"></div>
+                                <div class="field"><label>E (mm)</label><input type="number" id="s1e"></div>
+                            </div>
+                        </div>
+                        <div class="schema-pair">
+                            <div class="schema-img">
+                                <img src="./schema2.png" alt="Schema 2">
+                            </div>
+                            <div class="schema-inputs">
+                                <div class="field"><label>A (mm)</label><input type="number" id="s2a"></div>
+                                <div class="field"><label>B (mm)</label><input type="number" id="s2b"></div>
+                                <div class="field"><label>C (mm)</label><input type="number" id="s2c"></div>
+                                <div class="field"><label>D (mm)</label><input type="number" id="s2d"></div>
+                                <div class="field"><label>E (mm)</label><input type="number" id="s2e"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="actions">
+                <button type="button" class="btn btn-primary" onclick="openPreview()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Vorschau &amp; Drucken
+                </button>
+                <button type="button" class="btn btn-outline" onclick="resetForm()">
+                    Zurücksetzen
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-left">SKYBUD — Wärmepumpeninstallation Auftragsbestätigung</div>
+        <div class="footer-right">V 3.0 · 2026</div>
+    </footer>
+
+    <!-- PRINT PREVIEW MODAL -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-bar">
+            <div class="modal-bar-title">Vorschau — Auftragsbestätigung</div>
+            <div class="modal-bar-actions">
+                <button class="btn btn-primary" onclick="window.print()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    Drucken / PDF
+                </button>
+                <button class="btn btn-outline" onclick="closePreview()">Schließen</button>
+            </div>
+        </div>
+        <div class="modal-doc" id="previewDoc"></div>
+    </div>
+
+    <script>
+        function toggle(header) {
+            header.closest('.section').classList.toggle('open');
+        }
+
+        function prevImg(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const item = input.closest('.upload-item');
+            const img = item.querySelector('.upload-preview');
+            const icon = item.querySelector('.upload-item-icon');
+            const reader = new FileReader();
+            reader.onload = e => {
+                img.src = e.target.result;
+                img.style.display = 'block';
+                icon.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Безпечне отримання значення поля
+        function esc(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function val(id) {
+            const el = document.getElementById(id);
+            if (!el) return '';
+            const v = el.value.trim();
+            return v ? esc(v) : '';
+        }
+
+        function valText(id) {
+            const el = document.getElementById(id);
+            if (!el) return '';
+            const v = el.value.trim();
+            return v ? esc(v).replace(/\n/g, '<br>') : '';
+        }
+
+        function radioVal(name) {
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            return checked ? esc(checked.nextElementSibling.textContent.trim()) : '';
+        }
+
+        function row(label, value, unit) {
+            const display = value ? (unit ? value + ' ' + unit : value) : '—';
+            return `<tr>
+                <td class="dl">${label}</td>
+                <td class="dv${value ? '' : ' empty'}">${display}</td>
+            </tr>`;
+        }
+
+        function rowText(label, value) {
+            return `<tr>
+                <td class="dl">${label}</td>
+                <td class="dv${value ? '' : ' empty'}" style="white-space:pre-wrap">${value || '—'}</td>
+            </tr>`;
+        }
+
+        function section(num, title, rows) {
+            return `
+                <div class="doc-section">
+                    <div class="doc-section-title">${num} — ${title}</div>
+                    <table class="doc-table">${rows.join('')}</table>
+                </div>`;
+        }
+
+        function buildPhotos() {
+            const items = document.querySelectorAll('.upload-item');
+            let photos = '';
+            items.forEach(item => {
+                const img = item.querySelector('.upload-preview');
+                const name = item.querySelector('.upload-item-name').textContent;
+                if (img && img.src && img.style.display !== 'none') {
+                    photos += `<div class="doc-photo-item">
+                        <img src="${img.src}" alt="${esc(name)}">
+                        <div class="doc-photo-label">${esc(name)}</div>
+                    </div>`;
+                }
+            });
+            const grid = photos
+                ? `<div class="doc-photo-grid">${photos}</div>`
+                : `<p class="doc-no-photo">Keine Fotos hochgeladen</p>`;
+            return `<div class="doc-section">
+                <div class="doc-section-title">06 — Vor-Ort-Bilder</div>
+                ${grid}
+            </div>`;
+        }
+
+        function buildSchema() {
+            const schemas = [
+                { src: './schema1.png', ids: ['s1a','s1b','s1c','s1d','s1e'] },
+                { src: './schema2.png', ids: ['s2a','s2b','s2c','s2d','s2e'] },
+            ];
+            const letters = ['A','B','C','D','E'];
+            let html = '<div class="doc-section"><div class="doc-section-title">07 — Aufstellungsschema</div>';
+            schemas.forEach((s, si) => {
+                const rows = letters.map((l, i) => row(`${l} (mm)`, val(s.ids[i]))).join('');
+                html += `<div class="doc-schema-block">
+                    <div class="doc-schema-img"><img src="${s.src}" alt="Schema ${si+1}"></div>
+                    <div class="doc-schema-fields"><table class="doc-table">${rows}</table></div>
+                </div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function openPreview() {
+            const today = new Date().toLocaleDateString('de-DE');
+
+            const s01 = section('01', 'Kunde', [
+                row('Name', val('k_name')),
+                row('Telefon', val('k_tel')),
+                row('E-Mail', val('k_email')),
+                row('Anschrift', val('k_addr')),
+            ]);
+
+            const s02 = section('02', 'Projekt', [
+                row('Wärmepumpe Modell', val('wp_modell')),
+                row('Leistung', val('wp_kw'), 'kW'),
+                row('Hydraulikstation', val('hs_modell')),
+                row('Display / Besonderheiten', val('hs_display')),
+                row('Warmwasserspeicher', val('wws_liter'), 'L'),
+                row('Warmwasserspeicher Modell', val('wws_modell')),
+                row('Pufferspeicher', val('ps_liter'), 'L'),
+                row('Pufferspeicher Modell', val('ps_modell')),
+                row('Altheizung', radioVal('oldHeating')),
+                row('Altheizung Modell', val('alt_desc')),
+                row('Entsorgung / Netzbetreiber', val('alt_entsorgung')),
+                row('Solar / PV', radioVal('solar')),
+                row('SG Ready', radioVal('sgReady')),
+            ]);
+
+            const s03 = section('03', 'Gebäude', [
+                row('Wohnfläche', val('g_flaeche'), 'm²'),
+                row('Heizlast', val('g_heizlast'), 'kW'),
+                row('Heizbedarf', val('g_heizbedarf'), 'W/m²'),
+                row('Geschosse', val('g_geschosse')),
+                row('Länge', val('g_laenge'), 'm'),
+                row('Breite', val('g_breite'), 'm'),
+                row('Raumhöhe Min', val('g_hmin'), 'm'),
+                row('Raumhöhe Max', val('g_hmax'), 'm'),
+            ]);
+
+            const s04 = section('04', 'Montage / Standort', [
+                row('Standort Wärmepumpe', val('m_standort')),
+                row('Leitung außen', val('m_aussen'), 'm'),
+                row('Leitung innen', val('m_innen'), 'm'),
+                row('Kernbohrung', val('m_kern'), 'mm'),
+                row('Heizkörper / Ventile', val('m_hk')),
+                row('Zählerschrank', val('m_zaehler')),
+            ]);
+
+            const s05 = section('05', 'Hinweise', [
+                rowText('Hinweise für Monteure', valText('h_monteure')),
+                rowText('Hinweise für PM', valText('h_pm')),
+            ]);
+
+            const s06 = buildPhotos();
+            const s07 = buildSchema();
+
+            document.getElementById('previewDoc').innerHTML = `
+                <div class="doc-header">
+                    <div class="doc-logo-wrap">
+                        <img class="doc-logo" src="./logo.png" alt="SKYBUD">
+                        <div class="doc-company">SKYBUD</div>
+                    </div>
+                    <div class="doc-title-wrap">
+                        <div class="doc-title">Wärmepumpeninstallation</div>
+                        <div class="doc-subtitle">Auftragsbestätigung &nbsp;·&nbsp; ${today}</div>
+                    </div>
+                </div>
+                ${s01}${s02}${s03}${s04}${s05}${s06}${s07}
+            `;
+
+            document.getElementById('previewModal').classList.add('open');
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').classList.remove('open');
+        }
+
+        function resetForm() {
+            if (!confirm('Alle Daten zurücksetzen?')) return;
+            document.getElementById('wpForm').reset();
+            document.querySelectorAll('.upload-preview').forEach(img => { img.style.display = 'none'; img.src = ''; });
+            document.querySelectorAll('.upload-item-icon').forEach(i => i.style.display = '');
+        }
+
+        document.getElementById('previewModal').addEventListener('click', function(e) {
+            if (e.target === this) closePreview();
+        });
+    </script>
+
+</body>
+</html>
