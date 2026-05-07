@@ -790,12 +790,72 @@
             td.dv { font-size: 12px; }
         }
 
+        /* ─── IPHONE / 430px (≤ 480px) ────────────── */
+        @media (max-width: 480px) {
+            /* Nav — приховати назву документа, залишити тільки лого */
+            .nav { height: 52px; padding: 0 14px; gap: 10px; }
+            .nav-doc { display: none; }
+            .nav-sep { display: none; }
+            .nav-logo { height: 24px; }
+
+            /* Hero */
+            .hero { padding: 76px 14px 32px; }
+            .hero-label { font-size: 9px; margin-bottom: 12px; }
+            .hero-title { font-size: 28px; letter-spacing: -0.025em; }
+            .hero-sub { font-size: 13px; line-height: 1.6; }
+
+            /* Content */
+            .content { padding: 20px 14px 72px; }
+
+            /* Sections */
+            .section { margin-bottom: 3px; }
+            .section-header { padding: 14px; }
+            .section-body { padding: 0 14px 18px; }
+            .section-title { font-size: 13px; }
+
+            /* Fields */
+            .row { gap: 10px; margin-bottom: 10px; }
+            .field input, .field textarea, .field select { padding: 10px 12px; font-size: 14px; }
+            .field label { font-size: 9px; }
+
+            /* Blocks */
+            .block { padding: 12px; margin-bottom: 10px; }
+            .block-label { font-size: 9px; margin-bottom: 12px; }
+
+            /* Radio */
+            .radio-opt label { padding: 8px 12px; font-size: 12px; }
+
+            /* Upload */
+            .upload-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+            .upload-item { min-height: 80px; padding: 12px 8px; }
+
+            /* Schema */
+            .schema-img { min-height: 160px; }
+
+            /* Actions */
+            .actions { padding-top: 28px; }
+            .btn { font-size: 11px; padding: 13px 16px; }
+
+            /* Footer */
+            .footer { padding: 18px 14px; }
+            .footer-left { font-size: 10px; line-height: 1.5; }
+
+            /* Modal */
+            .modal-overlay { padding: 0; }
+            .modal-bar { padding: 12px 14px; gap: 8px; }
+            .modal-doc { padding: 20px 14px; }
+            .doc-title { font-size: 15px; }
+            .doc-section-title { font-size: 9px; }
+            td.dl { font-size: 9px; width: 46%; }
+            td.dv { font-size: 12px; }
+        }
+
         /* ─── ДУЖЕ МАЛЕНЬКИЙ ЕКРАН (≤ 380px) ──────── */
         @media (max-width: 380px) {
-            .hero-title { font-size: 26px; }
-            .nav-doc { max-width: 110px; }
+            .hero-title { font-size: 24px; }
             .upload-grid { grid-template-columns: 1fr; }
             .doc-photo-grid { grid-template-columns: 1fr; }
+            .modal-doc { padding: 16px 12px; }
         }
 
         /* ─── PRINT ────────────────────────────── */
