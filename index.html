@@ -858,6 +858,147 @@
             .modal-doc { padding: 16px 12px; }
         }
 
+        /* ─── Q-BLOCKS ──────────────────────────── */
+        .q-blocks { padding: 0 18px; }
+
+        .q-block {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .q-block:last-child { border-bottom: none; padding-bottom: 6px; }
+
+        .q-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .q-extra { margin-top: 12px; }
+
+        .q-field-extra { margin-top: 8px; }
+
+        .btn-add-mass {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(240,125,15,0.30);
+            border-radius: var(--radius);
+            padding: 7px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-add-mass:hover {
+            background: rgba(240,125,15,0.20);
+            border-color: var(--accent);
+        }
+
+        /* ─── SCHEMA VARIANTS ──────────────────── */
+        .schema-intro {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+            padding: 16px 0 4px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .variant-block {
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: opacity 0.25s;
+        }
+
+        .variant-block.inactive {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .variant-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 12px 18px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mindest-box {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            padding: 14px 18px;
+        }
+
+        .mindest-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            color: var(--text2);
+            margin-bottom: 8px;
+        }
+
+        .mindest-rows {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 24px;
+        }
+
+        .mindest-rows span { font-size: 12px; color: var(--text2); }
+
+        .schema-warning {
+            display: none;
+            font-size: 11px;
+            color: #e05a00;
+            background: rgba(224,90,0,0.10);
+            border: 1px solid rgba(224,90,0,0.30);
+            border-radius: 3px;
+            padding: 6px 10px;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-top: 1px solid var(--border);
+            background: var(--bg2);
+        }
+
+        .check-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .check-row label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text2);
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
         /* ─── PRINT ────────────────────────────── */
         @media print {
             .nav, .hero, .content, .footer, .modal-bar { display: none !important; }
@@ -904,8 +1045,7 @@
             Wärmepumpen<br><em>Auftragsbestätigung</em>
         </h1>
         <p class="hero-sub">
-            Projektdokumentation für Monteure und Projektmanager.
-            Technische Daten, Standort und Checklisten auf einem Blick.
+            Bitte tragen Sie Ihre Kontaktdaten, Objektinformationen und technischen Angaben für die Installation ein.
         </p>
     </section>
 
@@ -1048,30 +1188,10 @@
                 </div>
             </div>
 
-            <!-- 05 HINWEISE -->
+            <!-- 05 BILDER -->
             <div class="section">
                 <div class="section-header" onclick="toggle(this)">
-                    <div class="section-title"><span class="section-num">05</span>Hinweise für Monteure / PM</div>
-                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-                </div>
-                <div class="section-body">
-                    <div class="fields">
-                        <div class="block">
-                            <div class="block-label">Hinweise für Monteure</div>
-                            <div class="field"><textarea id="h_monteure"></textarea></div>
-                        </div>
-                        <div class="block">
-                            <div class="block-label">Hinweise für PM</div>
-                            <div class="field"><textarea id="h_pm"></textarea></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 06 BILDER -->
-            <div class="section">
-                <div class="section-header" onclick="toggle(this)">
-                    <div class="section-title"><span class="section-num">06</span>Vor-Ort-Bilder</div>
+                    <div class="section-title"><span class="section-num">05</span>Vor-Ort-Bilder</div>
                     <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
                 </div>
                 <div class="section-body">
@@ -1079,32 +1199,27 @@
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Standort WP</div>
+                            <div class="upload-item-name">Standort Wärmepumpe (Lageplan)</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Ölheizung</div>
+                            <div class="upload-item-name">bestehender Wärmeerzeuger</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Öltank</div>
+                            <div class="upload-item-name">Heizungspumpe</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Förderpumpe 1</div>
+                            <div class="upload-item-name">Warmwasser-Zirkulationspumpe</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Förderpumpe 2</div>
-                        </div>
-                        <div class="upload-item">
-                            <input type="file" accept="image/*" onchange="prevImg(this)">
-                            <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Heizung</div>
+                            <div class="upload-item-name">Übersichtsfoto der Heizungsanlage</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
@@ -1114,47 +1229,310 @@
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Zählerschrank</div>
+                            <div class="upload-item-name">FBH-Verteiler</div>
                         </div>
                         <div class="upload-item">
                             <input type="file" accept="image/*" onchange="prevImg(this)">
                             <img class="upload-preview"><div class="upload-item-icon">⬆</div>
-                            <div class="upload-item-name">Verteiler FBH OG</div>
+                            <div class="upload-item-name">Installationsort Elektroanschluss / Zählerschrank</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 07 SCHEMA -->
+            <!-- 06 SCHEMA -->
             <div class="section">
                 <div class="section-header" onclick="toggle(this)">
-                    <div class="section-title"><span class="section-num">07</span>Aufstellungsschema</div>
+                    <div class="section-title"><span class="section-num">06</span>Aufstellungsschema</div>
                     <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
                 </div>
                 <div class="section-body">
                     <div class="fields">
-                        <div class="schema-pair">
-                            <div class="schema-img">
-                                <img src="./schema1.png" alt="Schema 1">
+                        <p class="schema-intro">Die angegebenen Maße sind Mindestabstände für die Montage des Außengeräts. Bitte wählen Sie die passende Aufstellungsvariante und tragen Sie die tatsächlichen Maße vor Ort ein.</p>
+                        <div class="radios" style="margin-bottom:20px">
+                            <div class="radio-opt"><input type="radio" name="schemaVar" id="sv1" onchange="selectVariant(1)"><label for="sv1">Variante 1 – Aufstellung parallel zur Hauswand</label></div>
+                            <div class="radio-opt"><input type="radio" name="schemaVar" id="sv2" onchange="selectVariant(2)"><label for="sv2">Variante 2 – Aufstellung senkrecht zur Hauswand</label></div>
+                        </div>
+
+                        <div class="variant-block inactive" id="vb1">
+                            <div class="variant-title">Variante 1 – parallel zur Hauswand</div>
+                            <div class="schema-pair">
+                                <div class="schema-img">
+                                    <img src="./schema1.png" alt="Variante 1">
+                                </div>
+                                <div class="schema-inputs">
+                                    <div class="field">
+                                        <label>A (mm)</label>
+                                        <input type="number" id="s1a" disabled oninput="checkMin(this,500,'warn1a')">
+                                        <div class="schema-warning" id="warn1a">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field">
+                                        <label>B (mm)</label>
+                                        <input type="number" id="s1b" disabled oninput="checkMin(this,1000,'warn1b')">
+                                        <div class="schema-warning" id="warn1b">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field">
+                                        <label>C (mm)</label>
+                                        <input type="number" id="s1c" disabled oninput="checkMin(this,3000,'warn1c')">
+                                        <div class="schema-warning" id="warn1c">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field"><label>D (mm)</label><input type="number" id="s1d" disabled></div>
+                                    <div class="field"><label>E (mm)</label><input type="number" id="s1e" disabled></div>
+                                </div>
                             </div>
-                            <div class="schema-inputs">
-                                <div class="field"><label>A (mm)</label><input type="number" id="s1a"></div>
-                                <div class="field"><label>B (mm)</label><input type="number" id="s1b"></div>
-                                <div class="field"><label>C (mm)</label><input type="number" id="s1c"></div>
-                                <div class="field"><label>D (mm)</label><input type="number" id="s1d"></div>
-                                <div class="field"><label>E (mm)</label><input type="number" id="s1e"></div>
+                            <div class="mindest-box">
+                                <div class="mindest-title">Mindestabstände:</div>
+                                <div class="mindest-rows">
+                                    <span>A – min. 500 mm</span>
+                                    <span>B – min. 1000 mm</span>
+                                    <span>C – min. 3000 mm</span>
+                                    <span>D – tatsächliches Maß vor Ort</span>
+                                    <span>E – tatsächliches Maß vor Ort</span>
+                                </div>
+                            </div>
+                            <div class="check-row">
+                                <input type="checkbox" id="chk1" disabled>
+                                <label for="chk1">Die Mindestabstände wurden geprüft und werden eingehalten.</label>
                             </div>
                         </div>
-                        <div class="schema-pair">
-                            <div class="schema-img">
-                                <img src="./schema2.png" alt="Schema 2">
+
+                        <div class="variant-block inactive" id="vb2">
+                            <div class="variant-title">Variante 2 – senkrecht zur Hauswand</div>
+                            <div class="schema-pair">
+                                <div class="schema-img">
+                                    <img src="./schema2.png" alt="Variante 2">
+                                </div>
+                                <div class="schema-inputs">
+                                    <div class="field">
+                                        <label>A (mm)</label>
+                                        <input type="number" id="s2a" disabled oninput="checkMin(this,500,'warn2a')">
+                                        <div class="schema-warning" id="warn2a">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field">
+                                        <label>B (mm)</label>
+                                        <input type="number" id="s2b" disabled oninput="checkMin(this,1000,'warn2b')">
+                                        <div class="schema-warning" id="warn2b">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field">
+                                        <label>C (mm)</label>
+                                        <input type="number" id="s2c" disabled oninput="checkMin(this,3000,'warn2c')">
+                                        <div class="schema-warning" id="warn2c">Der eingegebene Wert liegt unter dem erforderlichen Mindestabstand. Bitte prüfen Sie die Aufstellung.</div>
+                                    </div>
+                                    <div class="field"><label>D (mm)</label><input type="number" id="s2d" disabled></div>
+                                    <div class="field"><label>E (mm)</label><input type="number" id="s2e" disabled></div>
+                                </div>
                             </div>
-                            <div class="schema-inputs">
-                                <div class="field"><label>A (mm)</label><input type="number" id="s2a"></div>
-                                <div class="field"><label>B (mm)</label><input type="number" id="s2b"></div>
-                                <div class="field"><label>C (mm)</label><input type="number" id="s2c"></div>
-                                <div class="field"><label>D (mm)</label><input type="number" id="s2d"></div>
-                                <div class="field"><label>E (mm)</label><input type="number" id="s2e"></div>
+                            <div class="mindest-box">
+                                <div class="mindest-title">Mindestabstände:</div>
+                                <div class="mindest-rows">
+                                    <span>A – min. 500 mm</span>
+                                    <span>B – min. 1000 mm</span>
+                                    <span>C – min. 3000 mm</span>
+                                    <span>D – tatsächliches Maß vor Ort</span>
+                                    <span>E – tatsächliches Maß vor Ort</span>
+                                </div>
+                            </div>
+                            <div class="check-row">
+                                <input type="checkbox" id="chk2" disabled>
+                                <label for="chk2">Die Mindestabstände wurden geprüft und werden eingehalten.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07 ROHRLEITUNGEN -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">07</span>Rohrleitungen und Montageumfang</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <p class="schema-intro">Bitte wählen Sie den Rohrleitungsdurchmesser aus und erfassen Sie die Angaben zu Leitungslängen und Montageumfang.</p>
+                        <div class="radios" style="margin-bottom:20px">
+                            <div class="radio-opt"><input type="radio" name="dnSelect" id="dn25" value="25" onchange="selectDN('25')"><label for="dn25">DN25</label></div>
+                            <div class="radio-opt"><input type="radio" name="dnSelect" id="dn32" value="32" onchange="selectDN('32')"><label for="dn32">DN32</label></div>
+                        </div>
+
+                        <!-- DN25 -->
+                        <div class="variant-block inactive" id="dnb25">
+                            <div class="variant-title">DN25</div>
+                            <div class="q-blocks">
+                                <div class="q-block">
+                                    <div class="q-label">Verlegung der Rohrleitungen DN25 im Erdreich bis 3 m Länge?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_erd" id="dn25_erd_ja" value="ja" onchange="qShow('dn25_erd','nein','dn25_erd_xtra')"><label for="dn25_erd_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_erd" id="dn25_erd_nein" value="nein" onchange="qShow('dn25_erd','nein','dn25_erd_xtra')"><label for="dn25_erd_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn25_erd_xtra" style="display:none">
+                                        <button type="button" class="btn-add-mass" id="dn25_erd_btn" onclick="showMassField('dn25_erd_btn','dn25_erd_fld')">+ Maße hinzufügen</button>
+                                        <div class="field q-field-extra" id="dn25_erd_fld" style="display:none">
+                                            <label>Länge im Erdreich eintragen (m)</label>
+                                            <input type="number" step="0.1" id="dn25_erd_len">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Verlegung der Rohrleitungen DN25 im Haus, außerhalb des Heizungsraums?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_haus" id="dn25_haus_ja" value="ja" onchange="qShow('dn25_haus','ja','dn25_haus_xtra')"><label for="dn25_haus_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_haus" id="dn25_haus_nein" value="nein" onchange="qShow('dn25_haus','ja','dn25_haus_xtra')"><label for="dn25_haus_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn25_haus_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Länge im Haus eintragen (m)</label>
+                                            <input type="number" step="0.1" id="dn25_haus_len">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Zirkulationspumpe der Heizungsanlage inkl. Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_zirk" id="dn25_zirk_ja" value="ja"><label for="dn25_zirk_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_zirk" id="dn25_zirk_nein" value="nein"><label for="dn25_zirk_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Warmwasser-Zirkulationspumpe inkl. Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_ww" id="dn25_ww_ja" value="ja"><label for="dn25_ww_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_ww" id="dn25_ww_nein" value="nein"><label for="dn25_ww_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Wasseraufbereitungssystem mit Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_wasser" id="dn25_wasser_ja" value="ja"><label for="dn25_wasser_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_wasser" id="dn25_wasser_nein" value="nein"><label for="dn25_wasser_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Montage Heizkörper?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_hk" id="dn25_hk_ja" value="ja" onchange="qShow('dn25_hk','ja','dn25_hk_xtra')"><label for="dn25_hk_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_hk" id="dn25_hk_nein" value="nein" onchange="qShow('dn25_hk','ja','dn25_hk_xtra')"><label for="dn25_hk_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn25_hk_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Anzahl eintragen</label>
+                                            <input type="number" id="dn25_hk_anzahl">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Obere und untere Ventile bei einem Heizkörper austauschen inkl. Material?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn25_ventile" id="dn25_ventile_ja" value="ja" onchange="qShow('dn25_ventile','ja','dn25_ventile_xtra')"><label for="dn25_ventile_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn25_ventile" id="dn25_ventile_nein" value="nein" onchange="qShow('dn25_ventile','ja','dn25_ventile_xtra')"><label for="dn25_ventile_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn25_ventile_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Anzahl der Sets eintragen</label>
+                                            <input type="number" id="dn25_ventile_sets">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DN32 -->
+                        <div class="variant-block inactive" id="dnb32">
+                            <div class="variant-title">DN32</div>
+                            <div class="q-blocks">
+                                <div class="q-block">
+                                    <div class="q-label">Verlegung der Rohrleitungen DN32 im Erdreich bis 3 m Länge?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_erd" id="dn32_erd_ja" value="ja" onchange="qShow('dn32_erd','nein','dn32_erd_xtra')"><label for="dn32_erd_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_erd" id="dn32_erd_nein" value="nein" onchange="qShow('dn32_erd','nein','dn32_erd_xtra')"><label for="dn32_erd_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn32_erd_xtra" style="display:none">
+                                        <button type="button" class="btn-add-mass" id="dn32_erd_btn" onclick="showMassField('dn32_erd_btn','dn32_erd_fld')">+ Maße hinzufügen</button>
+                                        <div class="field q-field-extra" id="dn32_erd_fld" style="display:none">
+                                            <label>Länge im Erdreich eintragen (m)</label>
+                                            <input type="number" step="0.1" id="dn32_erd_len">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Verlegung der Rohrleitungen DN32 im Haus, außerhalb des Heizungsraums?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_haus" id="dn32_haus_ja" value="ja" onchange="qShow('dn32_haus','ja','dn32_haus_xtra')"><label for="dn32_haus_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_haus" id="dn32_haus_nein" value="nein" onchange="qShow('dn32_haus','ja','dn32_haus_xtra')"><label for="dn32_haus_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn32_haus_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Länge im Haus eintragen (m)</label>
+                                            <input type="number" step="0.1" id="dn32_haus_len">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Zirkulationspumpe der Heizungsanlage inkl. Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_zirk" id="dn32_zirk_ja" value="ja"><label for="dn32_zirk_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_zirk" id="dn32_zirk_nein" value="nein"><label for="dn32_zirk_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Warmwasser-Zirkulationspumpe inkl. Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_ww" id="dn32_ww_ja" value="ja"><label for="dn32_ww_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_ww" id="dn32_ww_nein" value="nein"><label for="dn32_ww_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Wasseraufbereitungssystem mit Montage?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_wasser" id="dn32_wasser_ja" value="ja"><label for="dn32_wasser_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_wasser" id="dn32_wasser_nein" value="nein"><label for="dn32_wasser_nein">Nein</label></div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Montage Heizkörper?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_hk" id="dn32_hk_ja" value="ja" onchange="qShow('dn32_hk','ja','dn32_hk_xtra')"><label for="dn32_hk_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_hk" id="dn32_hk_nein" value="nein" onchange="qShow('dn32_hk','ja','dn32_hk_xtra')"><label for="dn32_hk_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn32_hk_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Anzahl eintragen</label>
+                                            <input type="number" id="dn32_hk_anzahl">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="q-block">
+                                    <div class="q-label">Obere und untere Ventile bei einem Heizkörper austauschen inkl. Material?</div>
+                                    <div class="radios">
+                                        <div class="radio-opt"><input type="radio" name="dn32_ventile" id="dn32_ventile_ja" value="ja" onchange="qShow('dn32_ventile','ja','dn32_ventile_xtra')"><label for="dn32_ventile_ja">Ja</label></div>
+                                        <div class="radio-opt"><input type="radio" name="dn32_ventile" id="dn32_ventile_nein" value="nein" onchange="qShow('dn32_ventile','ja','dn32_ventile_xtra')"><label for="dn32_ventile_nein">Nein</label></div>
+                                    </div>
+                                    <div class="q-extra" id="dn32_ventile_xtra" style="display:none">
+                                        <div class="field q-field-extra">
+                                            <label>Anzahl der Sets eintragen</label>
+                                            <input type="number" id="dn32_ventile_sets">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 08 HINWEISE -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">08</span>Hinweise zur Installation</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <p class="schema-intro">Falls es Besonderheiten am Objekt gibt oder wichtige Informationen in den vorherigen Abschnitten nicht erfasst wurden, können Sie diese hier ergänzen.</p>
+                        <div class="row row-1">
+                            <div class="field">
+                                <label>Ihre Hinweise an die Montagefirma</label>
+                                <textarea id="hinweise_montage" placeholder="Bitte tragen Sie hier zusätzliche Informationen, Besonderheiten oder Hinweise zur Installation ein." style="min-height:140px"></textarea>
                             </div>
                         </div>
                     </div>
@@ -1284,27 +1662,61 @@
                 ? `<div class="doc-photo-grid">${photos}</div>`
                 : `<p class="doc-no-photo">Keine Fotos hochgeladen</p>`;
             return `<div class="doc-section">
-                <div class="doc-section-title">06 — Vor-Ort-Bilder</div>
+                <div class="doc-section-title">05 — Vor-Ort-Bilder</div>
                 ${grid}
             </div>`;
         }
 
         function buildSchema() {
-            const schemas = [
-                { src: './schema1.png', ids: ['s1a','s1b','s1c','s1d','s1e'] },
-                { src: './schema2.png', ids: ['s2a','s2b','s2c','s2d','s2e'] },
-            ];
-            const letters = ['A','B','C','D','E'];
-            let html = '<div class="doc-section"><div class="doc-section-title">07 — Aufstellungsschema</div>';
-            schemas.forEach((s, si) => {
-                const rows = letters.map((l, i) => row(`${l} (mm)`, val(s.ids[i]))).join('');
-                html += `<div class="doc-schema-block">
-                    <div class="doc-schema-img"><img src="${s.src}" alt="Schema ${si+1}"></div>
-                    <div class="doc-schema-fields"><table class="doc-table">${rows}</table></div>
+            const checked = document.querySelector('input[name="schemaVar"]:checked');
+            if (!checked) {
+                return `<div class="doc-section">
+                    <div class="doc-section-title">06 — Aufstellungsschema</div>
+                    <p class="doc-no-photo">Keine Variante ausgewählt</p>
                 </div>`;
-            });
-            html += '</div>';
-            return html;
+            }
+            const v = checked.id === 'sv1' ? 1 : 2;
+            const src = v === 1 ? './schema1.png' : './schema2.png';
+            const ids = v === 1 ? ['s1a','s1b','s1c','s1d','s1e'] : ['s2a','s2b','s2c','s2d','s2e'];
+            const chkId = v === 1 ? 'chk1' : 'chk2';
+            const varName = v === 1
+                ? 'Variante 1 – Aufstellung parallel zur Hauswand'
+                : 'Variante 2 – Aufstellung senkrecht zur Hauswand';
+            const letters = ['A','B','C','D','E'];
+            const rows = letters.map((l, i) => row(`${l} (mm)`, val(ids[i]))).join('');
+            const chkEl = document.getElementById(chkId);
+            const confirmed = chkEl && chkEl.checked;
+            return `<div class="doc-section">
+                <div class="doc-section-title">06 — Aufstellungsschema</div>
+                <p style="font-size:11px;color:#888;margin-bottom:12px">${varName}</p>
+                <div class="doc-schema-block">
+                    <div class="doc-schema-img"><img src="${src}" alt="${varName}"></div>
+                    <div class="doc-schema-fields"><table class="doc-table">${rows}</table></div>
+                </div>
+                <div style="margin-top:10px;font-size:11px;color:#555;padding:8px 10px;background:#f8f8f8;border-radius:3px;border:1px solid #eee">
+                    <strong>Mindestabstände:</strong> A – min. 500 mm &nbsp;·&nbsp; B – min. 1000 mm &nbsp;·&nbsp; C – min. 3000 mm
+                </div>
+                <div style="margin-top:8px;font-size:12px;color:${confirmed ? '#1a7a1a' : '#cc4400'}">
+                    ${confirmed ? '✓ Mindestabstände wurden geprüft und werden eingehalten.' : '✗ Mindestabstände noch nicht bestätigt.'}
+                </div>
+            </div>`;
+        }
+
+        function selectVariant(v) {
+            const b1 = document.getElementById('vb1');
+            const b2 = document.getElementById('vb2');
+            const active = v === 1 ? b1 : b2;
+            const inactive = v === 1 ? b2 : b1;
+            active.classList.remove('inactive');
+            inactive.classList.add('inactive');
+            active.querySelectorAll('input').forEach(i => i.disabled = false);
+            inactive.querySelectorAll('input').forEach(i => i.disabled = true);
+        }
+
+        function checkMin(input, min, warnId) {
+            const warn = document.getElementById(warnId);
+            const v = parseFloat(input.value);
+            warn.style.display = (input.value !== '' && !isNaN(v) && v < min) ? 'block' : 'none';
         }
 
         function openPreview() {
@@ -1353,13 +1765,12 @@
                 row('Zählerschrank', val('m_zaehler')),
             ]);
 
-            const s05 = section('05', 'Hinweise', [
-                rowText('Hinweise für Monteure', valText('h_monteure')),
-                rowText('Hinweise für PM', valText('h_pm')),
+            const s05 = buildPhotos();
+            const s06 = buildSchema();
+            const s07 = buildRohrleitung();
+            const s08 = section('08', 'Hinweise zur Installation', [
+                rowText('Hinweise an die Montagefirma', valText('hinweise_montage')),
             ]);
-
-            const s06 = buildPhotos();
-            const s07 = buildSchema();
 
             document.getElementById('previewDoc').innerHTML = `
                 <div class="doc-header">
@@ -1372,7 +1783,7 @@
                         <div class="doc-subtitle">Auftragsbestätigung &nbsp;·&nbsp; ${today}</div>
                     </div>
                 </div>
-                ${s01}${s02}${s03}${s04}${s05}${s06}${s07}
+                ${s01}${s02}${s03}${s04}${s05}${s06}${s07}${s08}
             `;
 
             document.getElementById('previewModal').classList.add('open');
@@ -1382,11 +1793,109 @@
             document.getElementById('previewModal').classList.remove('open');
         }
 
+        function radioRaw(name) {
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            return checked ? checked.value : '';
+        }
+
+        function selectDN(dn) {
+            const b25 = document.getElementById('dnb25');
+            const b32 = document.getElementById('dnb32');
+            const active = dn === '25' ? b25 : b32;
+            const inactive = dn === '25' ? b32 : b25;
+            active.classList.remove('inactive');
+            inactive.classList.add('inactive');
+        }
+
+        function qShow(name, triggerVal, extraId) {
+            const checked = document.querySelector(`input[name="${name}"]:checked`);
+            const extra = document.getElementById(extraId);
+            if (!extra) return;
+            extra.style.display = (checked && checked.value === triggerVal) ? 'block' : 'none';
+        }
+
+        function showMassField(btnId, fieldId) {
+            document.getElementById(btnId).style.display = 'none';
+            document.getElementById(fieldId).style.display = 'block';
+        }
+
+        function buildRohrleitung() {
+            const dn = radioRaw('dnSelect');
+            if (!dn) {
+                return `<div class="doc-section">
+                    <div class="doc-section-title">07 — Rohrleitungen und Montageumfang</div>
+                    <p class="doc-no-photo">Kein Rohrleitungsdurchmesser ausgewählt</p>
+                </div>`;
+            }
+            const p = `dn${dn}_`;
+            const r = [];
+            r.push(row('Rohrleitungsdurchmesser', `DN${dn}`));
+
+            const erdVal = radioRaw(`${p}erd`);
+            if (erdVal) {
+                r.push(row(`Verlegung DN${dn} im Erdreich bis 3 m`, erdVal === 'ja' ? 'Ja' : 'Nein'));
+                if (erdVal === 'nein') {
+                    const len = val(`${p}erd_len`);
+                    if (len) r.push(row('Länge im Erdreich', len, 'm'));
+                }
+            }
+
+            const hausVal = radioRaw(`${p}haus`);
+            if (hausVal) {
+                r.push(row(`Verlegung DN${dn} im Haus, außerh. Heizungsraum`, hausVal === 'ja' ? 'Ja' : 'Nein'));
+                if (hausVal === 'ja') {
+                    const len = val(`${p}haus_len`);
+                    if (len) r.push(row('Länge im Haus', len, 'm'));
+                }
+            }
+
+            const zirkVal = radioRaw(`${p}zirk`);
+            if (zirkVal) r.push(row('Zirkulationspumpe Heizungsanlage inkl. Montage', zirkVal === 'ja' ? 'Ja' : 'Nein'));
+
+            const wwVal = radioRaw(`${p}ww`);
+            if (wwVal) r.push(row('Warmwasser-Zirkulationspumpe inkl. Montage', wwVal === 'ja' ? 'Ja' : 'Nein'));
+
+            const wasserVal = radioRaw(`${p}wasser`);
+            if (wasserVal) r.push(row('Wasseraufbereitungssystem mit Montage', wasserVal === 'ja' ? 'Ja' : 'Nein'));
+
+            const hkVal = radioRaw(`${p}hk`);
+            if (hkVal) {
+                r.push(row('Montage Heizkörper', hkVal === 'ja' ? 'Ja' : 'Nein'));
+                if (hkVal === 'ja') {
+                    const anzahl = val(`${p}hk_anzahl`);
+                    if (anzahl) r.push(row('Anzahl Heizkörper', anzahl));
+                }
+            }
+
+            const ventileVal = radioRaw(`${p}ventile`);
+            if (ventileVal) {
+                r.push(row('Ventile austauschen inkl. Material', ventileVal === 'ja' ? 'Ja' : 'Nein'));
+                if (ventileVal === 'ja') {
+                    const sets = val(`${p}ventile_sets`);
+                    if (sets) r.push(row('Anzahl der Sets', sets));
+                }
+            }
+
+            return `<div class="doc-section">
+                <div class="doc-section-title">07 — Rohrleitungen und Montageumfang</div>
+                <table class="doc-table">${r.join('')}</table>
+            </div>`;
+        }
+
         function resetForm() {
             if (!confirm('Alle Daten zurücksetzen?')) return;
             document.getElementById('wpForm').reset();
             document.querySelectorAll('.upload-preview').forEach(img => { img.style.display = 'none'; img.src = ''; });
             document.querySelectorAll('.upload-item-icon').forEach(i => i.style.display = '');
+            document.getElementById('vb1').classList.add('inactive');
+            document.getElementById('vb2').classList.add('inactive');
+            document.querySelectorAll('#vb1 input, #vb2 input').forEach(i => i.disabled = true);
+            document.querySelectorAll('.schema-warning').forEach(w => w.style.display = 'none');
+            document.getElementById('dnb25').classList.add('inactive');
+            document.getElementById('dnb32').classList.add('inactive');
+            document.querySelectorAll('.q-extra').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.q-field-extra').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.btn-add-mass').forEach(el => el.style.display = '');
         }
 
         document.getElementById('previewModal').addEventListener('click', function(e) {
