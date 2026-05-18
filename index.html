@@ -410,6 +410,54 @@
             display: none;
         }
 
+        /* ─── VIDEO UPLOAD ─────────────────────── */
+        .video-block { margin-bottom: 24px; }
+        .video-block:last-child { margin-bottom: 0; }
+
+        .video-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 28px 0;
+        }
+
+        .video-upload-item {
+            border: 1px dashed var(--border2);
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            background: var(--bg2);
+            position: relative;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .video-upload-item:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .video-upload-item input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-upload-icon { color: var(--text2); flex-shrink: 0; }
+
+        .video-upload-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text2);
+        }
+
         /* ─── SCHEMA ───────────────────────────── */
         .schema-pair {
             display: grid;
@@ -1520,10 +1568,43 @@
                 </div>
             </div>
 
-            <!-- 08 HINWEISE -->
+            <!-- 08 VIDEO TRANSPORTSTRECKE -->
             <div class="section">
                 <div class="section-header" onclick="toggle(this)">
-                    <div class="section-title"><span class="section-num">08</span>Hinweise zur Installation</div>
+                    <div class="section-title"><span class="section-num">08</span>Video Transportstrecke</div>
+                    <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+                </div>
+                <div class="section-body">
+                    <div class="fields">
+                        <div class="video-block">
+                            <p class="schema-intro">Bitte senden Sie uns ein Video der Transportstrecke vom Entladeort der Wärmepumpe bis zum vorgesehenen Aufstellort der Außeneinheit.<br><br>Das Video dient zur besseren Einschätzung der örtlichen Gegebenheiten und zur Prüfung, ob für die Umsetzung der Außeneinheit vor Ort zusätzlich ein Kran oder anderes Hebezeug erforderlich ist.</p>
+                            <div class="video-upload-item">
+                                <input type="file" id="video_aussen" accept="video/*" onchange="prevVid(this, 'video_aussen_label')">
+                                <div class="video-upload-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="14" height="16" rx="2"/><path d="M16 8l4-2v12l-4-2"/></svg>
+                                </div>
+                                <div class="video-upload-label" id="video_aussen_label">Video auswählen oder hier ablegen</div>
+                            </div>
+                        </div>
+                        <div class="video-divider"></div>
+                        <div class="video-block">
+                            <p class="schema-intro">Bitte senden Sie uns ein kurzes Video vom Eingangsbereich des Hauses bis zum Heizungsraum bzw. bis zu den Stellen, an denen die Inneneinheit, der Warmwasserspeicher sowie der Pufferspeicher montiert werden sollen.<br><br>Das Video dient zur Prüfung, ob die Geräte problemlos durch das Gebäude transportiert und an die vorgesehenen Montageorte gebracht werden können.</p>
+                            <div class="video-upload-item">
+                                <input type="file" id="video_innen" accept="video/*" onchange="prevVid(this, 'video_innen_label')">
+                                <div class="video-upload-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="14" height="16" rx="2"/><path d="M16 8l4-2v12l-4-2"/></svg>
+                                </div>
+                                <div class="video-upload-label" id="video_innen_label">Video auswählen oder hier ablegen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 09 HINWEISE -->
+            <div class="section">
+                <div class="section-header" onclick="toggle(this)">
+                    <div class="section-title"><span class="section-num">09</span>Hinweise zur Installation</div>
                     <div class="section-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
                 </div>
                 <div class="section-body">
@@ -1592,6 +1673,15 @@
                 icon.style.display = 'none';
             };
             reader.readAsDataURL(file);
+        }
+
+        function prevVid(input, labelId) {
+            const file = input.files[0];
+            if (!file) return;
+            const label = document.getElementById(labelId);
+            if (!label) return;
+            label.textContent = file.name;
+            label.style.color = 'var(--accent)';
         }
 
         // Безпечне отримання значення поля
@@ -1768,7 +1858,8 @@
             const s05 = buildPhotos();
             const s06 = buildSchema();
             const s07 = buildRohrleitung();
-            const s08 = section('08', 'Hinweise zur Installation', [
+            const s08 = buildVideoTransport();
+            const s09 = section('09', 'Hinweise zur Installation', [
                 rowText('Hinweise an die Montagefirma', valText('hinweise_montage')),
             ]);
 
@@ -1783,7 +1874,7 @@
                         <div class="doc-subtitle">Auftragsbestätigung &nbsp;·&nbsp; ${today}</div>
                     </div>
                 </div>
-                ${s01}${s02}${s03}${s04}${s05}${s06}${s07}${s08}
+                ${s01}${s02}${s03}${s04}${s05}${s06}${s07}${s08}${s09}
             `;
 
             document.getElementById('previewModal').classList.add('open');
@@ -1882,6 +1973,17 @@
             </div>`;
         }
 
+        function buildVideoTransport() {
+            const aussenFile = document.getElementById('video_aussen');
+            const innenFile = document.getElementById('video_innen');
+            const aLabel = (aussenFile && aussenFile.files[0]) ? esc(aussenFile.files[0].name) : '';
+            const iLabel = (innenFile && innenFile.files[0]) ? esc(innenFile.files[0].name) : '';
+            return section('08', 'Video Transportstrecke', [
+                row('Video Außeneinheit (Transportstrecke)', aLabel),
+                row('Video Inneneinheit (Transportweg)', iLabel),
+            ]);
+        }
+
         function resetForm() {
             if (!confirm('Alle Daten zurücksetzen?')) return;
             document.getElementById('wpForm').reset();
@@ -1896,6 +1998,10 @@
             document.querySelectorAll('.q-extra').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.q-field-extra').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.btn-add-mass').forEach(el => el.style.display = '');
+            ['video_aussen_label', 'video_innen_label'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.textContent = 'Video auswählen oder hier ablegen'; el.style.color = ''; }
+            });
         }
 
         document.getElementById('previewModal').addEventListener('click', function(e) {
